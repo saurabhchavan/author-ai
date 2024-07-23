@@ -1,0 +1,149 @@
+$chat-window-border-color: #949494;
+$chat-window-background-color: #ffffff;
+$chat-bubble-outgoing-bg: #5627d8;
+$chat-bubble-incoming-bg: #f6f6f6;
+$chat-bubble-incoming-color: #242424;
+$chat-window-titlebar-color: #241056;
+$chat-window-font-size: 14px;
+$chat-bubble-border-radius: 5px;
+$chat-window-padding: 10px;
+$chat-window-margin: 10px;
+
+.chat-bubble {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  font-size: $chat-window-font-size;
+  border-radius: $chat-bubble-border-radius;
+
+  .message {
+    float: left;
+    max-width: 75%;
+    padding: $chat-window-padding;
+    margin-bottom: 13px;
+    border-radius: $chat-bubble-border-radius;
+    clear: both;
+
+    &.incoming {
+      background-color: $chat-bubble-incoming-bg;
+      color: $chat-bubble-incoming-color;
+      border-bottom-left-radius: 0;
+    }
+
+    &.outgoing {
+      float: right;
+      background-color: $chat-bubble-outgoing-bg;
+      color: $chat-window-background-color;
+      border-bottom-right-radius: 0;
+    }
+  }
+}
+
+.demo-wrapper {
+  height: 100vh;
+  width: 100vw;
+  background: $chat-bubble-incoming-bg;
+  position: relative;
+  .demo-wrapper-content {
+    text-align: left;
+    position: absolute !important;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
+}
+
+.chat-window {
+  border: 1px solid $chat-window-border-color;
+  background: $chat-window-background-color;
+  box-shadow: 0 0 11px 1px rgba(#828282, 25%);
+  height: 80vh;
+  max-height: 441px;
+  width: 371px;
+  display: flex;
+  flex-direction: column;
+
+  .chat-wrapper {
+    flex-basis: 100%;
+    overflow: scroll;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.message-area {
+  display: flex;
+  border-top: 1px solid $chat-window-border-color;
+
+  .text-field {
+    resize: none;
+    overflow-x: disabled;
+    height: 22px;
+    padding: $chat-window-padding;
+    flex: 1;
+    font-size: $chat-window-font-size;
+    min-width: 0px;
+    width: 10vw;
+    border: 0;
+    color: $chat-bubble-incoming-color;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &::placeholder {
+      color: #767676;
+    }
+  }
+}
+
+.titlebar {
+  width: 100%;
+  max-height: 44px;
+  background: $chat-window-titlebar-color;
+  height: 26px;
+  border: 1px $chat-window-titlebar-color;
+}
+
+.title {
+  color: $chat-window-background-color;
+  padding-left: $chat-window-padding;
+  padding-top: 5px;
+  font-size: $chat-window-font-size;
+  font-weight: 600; // wasn't specified in the requirements document
+  float: left;
+}
+
+.action {
+  float: right;
+}
+
+.close {
+  background-color: transparent;
+  border: 0;
+}
+
+.close-icon {
+  background-image: url("assets/close.png");
+  height: 24px;
+  width: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  display: block;
+  filter: invert(100%);
+  padding-right: $chat-window-padding;
+}
+
+.btn {
+  background-image: url("assets/sent.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: $chat-window-padding;
+  background-color: transparent;
+  border: none;
+  margin-right: $chat-window-margin;
+  rotate: -20deg;
+}
