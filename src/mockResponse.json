@@ -4,6 +4,10 @@
     "ai": "I’m sorry, Dave. I’m afraid I can’t do that."
   },
   {
+    "user": "Open the pod bay doors, Hal.",
+    "ai": "I’m sorry, Dave. I’m afraid I can’t do that."
+  },
+  {
     "user": "What’s the problem?",
     "ai": "I think you know what the problem is just as well as l do."
   },

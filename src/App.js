@@ -3,6 +3,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import './App.scss'; // import CSS for App component
 import data from './mockResponse.json'; // import JSON data for chat messages
 
+import parse from "html-react-parser";
+
 // function to get response based on input message
 export const getResponseMessage = (inputMessage) => {
   const { ai } = data.find(obj => obj.user.toLowerCase() === inputMessage.toLowerCase()) || {};
@@ -30,9 +32,31 @@ function App() {
 
     // state for list of chat messages
     const [messages, setMessages] = useState([
-      { type: 'incoming', message: 'Hi! Let us know how we can help and we`ll get someone connected to you right away!' },
-      { type: 'incoming', message: 'Let me know the topic you need more information on so I can help' }
+      { type: 'incoming', message: 'Hi! Let us know how we can help' },
+      { type: 'incoming', message: 'Select an option:' },
+      { type: 'options', options: ['Create Question', 'Others'] }
     ]);
+
+    const OptionsMessage = ({ options }) => {
+      return (
+        <div className="options">
+          {options.map((option, index) => (
+            <button key={index} className="option" onClick={() => handleOptionClick(option)}>{option}</button>
+          ))}
+        </div>
+      );
+    };
+
+    // Function to handle option button clicks
+    const handleOptionClick = (option) => {
+      let responseMessage;
+      if (option === 'Create Question') {
+        responseMessage = "Question Creation can be done by clicking on the 'Create New Question' button on <a target=\"blank\" href=\"https://kna.learnwithatom.com/author/organizations/68700940-f509-4662-975f-a3ba3382aa9b/content-items\">Maestro</a>";
+      } else {
+        responseMessage = 'Please specify what you need help with.';
+      }
+      setMessages([...messages, { type: 'outgoing', message: option }, { type: 'incoming', message: responseMessage }]);
+    }
 
     // update the state when a new message is added so we see the latest message
     useEffect(() => {
@@ -120,7 +144,8 @@ function App() {
     // component for incoming chat bubble
     const IncomingChatBubble = (props) => {
       return (
-        <div className="chat-bubble"><div className="message incoming">{props.message}</div></div>
+        <div className="chat-bubble"><div className="message incoming">
+          {parse(props.message)}</div></div>
       )
     }
 
@@ -139,7 +164,20 @@ function App() {
     return (
       <div className="chat-window">
         <Titlebar title="Chat" />
+
         <div className="chat-wrapper" ref={windowRef}>
+          {messages.map((item, index) => {
+            if (item.type === "outgoing") {
+              return <OutgoingChatBubble key={index}>{item.message}</OutgoingChatBubble>;
+            } else if (item.type === "incoming") {
+              return <IncomingChatBubble key={index} message={item.message} />;
+            } else if (item.type === "options") {
+              return <OptionsMessage key={index} options={item.options} />;
+            }
+            return null;
+          })}
+        </div>
+        {/* <div className="chat-wrapper" ref={windowRef}>
           {messages.map((item, index) => {
             return (
               item.type === "outgoing" ?
@@ -147,7 +185,7 @@ function App() {
                 <IncomingChatBubble key={index} message={item.message} />
             );
           })}
-        </div>
+        </div> */}
         <MessageArea />
       </div>
     )
