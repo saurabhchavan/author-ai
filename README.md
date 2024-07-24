@@ -1,4 +1,3 @@
-
 # Chat Bot App
 
 ## Demo link:
