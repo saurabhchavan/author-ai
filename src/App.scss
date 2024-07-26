@@ -148,6 +148,12 @@ $chat-window-margin: 10px;
   rotate: -20deg;
 }
 
+.titlebar .logo {
+  width: 10px; /* Adjust the size as needed */
+  height: 10px;
+  margin-right: 10px;
+}
+
 /* CSS for buttons in chat */
 .options {
   display: flex;

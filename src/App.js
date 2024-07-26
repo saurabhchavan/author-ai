@@ -4,6 +4,7 @@ import './App.scss'; // import CSS for App component
 import data from './mockResponse.json'; // import JSON data for chat messages
 
 import parse from "html-react-parser";
+import logo from './assets/logo.png'; // import logo image
 
 // function to get response based on input message
 export const getResponseMessage = (inputMessage) => {
@@ -74,6 +75,7 @@ function App() {
       return (
         <div className="titlebar" role="banner">
           <div className="title" role="heading" aria-level="1" aria-label="Chat header">
+          <img src={logo} alt="Logo" className="logo" />
             {props.title}
           </div>
           <div className="action">
@@ -163,7 +165,7 @@ function App() {
     // render chat window
     return (
       <div className="chat-window">
-        <Titlebar title="Chat" />
+        <Titlebar title="MAI Chat" />
 
         <div className="chat-wrapper" ref={windowRef}>
           {messages.map((item, index) => {
